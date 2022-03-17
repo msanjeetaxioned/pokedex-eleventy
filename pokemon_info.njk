@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+
+pagination:
+    data: pokemons
+    size: 1
+    alias: pokemon
+permalink: "/pokemons/{{ pokemon.name | slugify }}/index.html"
+
+backButton: true
+---
+
+<div class='pokemon-info-box'>
+    <figure>
+        <img src='{{pokemon.sprites.front_default}}' alt='{{pokemon.name}}'>
+    </figure>
+    <p class='pokemon-types'>
+        {% if pokemon.types|length > 1 %}
+            {{ pokemon.types[0].type.name }},&nbsp;{{ pokemon.types[1].type.name }}
+        {% else %}
+            {{ pokemon.types[0].type.name }}
+        {% endif %}
+    </p>
+    <h2>{{pokemon.name}}</h2>
+    <ul class='stats'>
+        {% for stat in pokemon.stats -%}
+            <li>
+                <span class='stat-name'>{{stat.stat.name}}</span>
+                <span class='stat-value'>{{stat.base_stat}}</span>
+            </li>
+        {%- endfor -%}
+    </ul>
+    <ul class='abilities'>
+        <li>
+            <span class='ability'>Normal Ability</span>
+            <span class='ability-value'>{{pokemon.abilities[0].ability.name}}</span>
+        </li>
+        <li>
+            <span class='ability'>Hidden Ability</span>
+            <span class='ability-value'>{{pokemon.abilities[1].ability.name}}</span>
+        </li>
+    </ul>
+</div>

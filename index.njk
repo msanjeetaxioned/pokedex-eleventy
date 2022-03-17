@@ -1,0 +1,45 @@
+---
+layout: layouts/base.njk
+
+indexvalue: 1
+pagination:
+    data: pokemons
+    size: 12
+    pageNumber: 1
+
+backButton: false
+---
+
+<ul class='pokedex'>
+    {% for pokemon in pagination.items %}
+    <li class='pokemon'>
+        <figure>
+            <img src='{{pokemon.sprites.front_default}}' alt='{{pokemon.name}} Image'>
+        </figure>
+        <div class='black-bar'>
+        </div>
+        <span class='circle'>.</span>
+        <div class='pokemon-info'>
+            <h2>
+                <a href="/pokemons/{{pokemon.name}}" title="{{pokemon.name}}">{{pokemon.name}}</a>
+            </h2>
+            <p>
+                type:&nbsp;
+                {% if pokemon.types|length > 1 %}
+                    {{ pokemon.types[0].type.name }},&nbsp;{{ pokemon.types[1].type.name }}
+                {% else %}
+                    {{ pokemon.types[0].type.name }}
+                {% endif %}
+            </p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+<ul class='pages'>
+    {% for i in range( indexvalue , pagination.size) -%}
+        <li class='page-number'>
+            <a href="/{{i}}" class="{% if pagination.pageNumber === i %}active{% endif %}">{{i}}</a>
+        </li>
+    {%- endfor %}
+</ul>
