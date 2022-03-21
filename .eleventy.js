@@ -4,6 +4,7 @@ const NOT_FOUND_PATH = "_site/404.html";
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy('images');
     eleventyConfig.addPassthroughCopy('css');
+    eleventyConfig.addPassthroughCopy('_redirects');
 
     eleventyConfig.setBrowserSyncConfig({
         callbacks: {
