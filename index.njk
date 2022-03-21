@@ -37,9 +37,11 @@ backButton: false
 </ul>
 
 <ul class='pages'>
-    {% for i in range( indexvalue , pagination.size) -%}
+    {% if pagination.href.previous %}<li class='page-number'><a href="{{ pagination.href.previous }}">Prev</a></li>{% endif %}
+    {% for page in (pagination.pages) -%}
         <li class='page-number'>
-            <a href="/{{i}}" class="{% if pagination.pageNumber === i %}active{% endif %}">{{i}}</a>
+            <a href="/{{loop.index}}" class="{% if pagination.pageNumber === loop.index %}active{% endif %}">{{loop.index}}</a>
         </li>
     {%- endfor %}
+    {% if pagination.href.next %}<li class='page-number'><a href="{{ pagination.href.next }}">Next</a></li>{% endif %}
 </ul>
